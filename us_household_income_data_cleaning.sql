@@ -1,7 +1,7 @@
 /* 
 
 US Household Income 
-(Data Cleaning)
+(Data Cleaning Queries)
 
 */
 
@@ -13,7 +13,9 @@ SELECT *
 FROM US_project.us_household_income_statistics;
 ;
 
--- 
+
+-- Identify numbe of unique values 
+
 SELECT COUNT(id)
 FROM US_project.us_household_income;
 ;
@@ -21,7 +23,6 @@ FROM US_project.us_household_income;
 SELECT COUNT(id)
 FROM US_project.us_household_income_statistics;
 ;
-
 
 
 -- Identifying duplicates and deleting them
@@ -43,6 +44,7 @@ SELECT row_id,
 WHERE row_num > 1
 ;
 
+
 DELETE FROM us_household_income 
 WHERE row_id IN (
 	SELECT row_id
@@ -55,12 +57,15 @@ WHERE row_id IN (
 ;
 
 
+
 -- Checking consistency of column 'State_Name' values 
 
 SELECT State_Name
 FROM US_project.us_household_income
 ORDER BY State_Name
 ;
+
+
 
 -- Corrercting misspeled cell values
 
@@ -75,6 +80,7 @@ WHERE State_Name = 'alabama'
 ;
 
 
+
 -- Correcting inconsistent values
 
 SELECT *
@@ -84,11 +90,13 @@ ORDER BY 1
 ;
 
 
+
 UPDATE US_project.us_household_income
 SET Place = 'Autaugaville'
 WHERE County = 'Autauga County'
 AND City = 'Vinemont'
 ;
+
 
 
 SELECT Type, COUNT(Type)
@@ -98,10 +106,12 @@ ORDER BY 1
 ;
 
 
+
 UPDATE us_household_income
 SET Type = 'Borough'
 WHERE Type = 'Boroughs'
 ;
+
 
 
 -- Finding 'Null' or '0' values 
@@ -110,6 +120,7 @@ SELECT DISTINCT AWater
 FROM US_project.us_household_income
 WHERE AWater = 0 OR AWater = ' ' OR AWater IS NULL
 ;
+
 
 
 -- Some irregular values where some counties have no land area
