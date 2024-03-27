@@ -14,7 +14,7 @@ FROM US_project.us_household_income_statistics;
 ;
 
 
--- Identify numbe of unique values 
+-- Identify number of unique values 
 
 SELECT COUNT(id)
 FROM US_project.us_household_income;
